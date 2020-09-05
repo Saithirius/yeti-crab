@@ -50,16 +50,16 @@ const TableReducer = (state = initialState, action) => {
 }
 
 export const initApp = () => (dispatch) => {
-  for (let i = 0; i < localStorage.length; i++){
-    if (localStorage.key(i) === 'lastRequestNumber') continue
-    const request = JSON.parse(localStorage.getItem(localStorage.key(i)))
-    dispatch({ type: ADD_REQUEST, newRequest: request})
+  api.init()
+  const requests = api.getRequests()
+  for (let i = 0; i < requests; i++){
+    dispatch({ type: ADD_REQUEST, newRequest: requests[i]})
   }
   dispatch(requestsSort('number'))
 }
 export const addRequest = (company, ati, fullName, tel, comment) => (dispatch) => {
   const newRequest = {
-    number: parseInt(localStorage.getItem('lastRequestNumber')) + 1,
+    number: parseInt(api.getLastNumber()) + 1,
     company: company,
     ati: ati,
     fullName: fullName,
@@ -74,7 +74,7 @@ export const delRequest = (number) => (dispatch) => {
   dispatch({ type: DEL_REQUEST, number: number })
 };
 export const changeRequest = (number, company, ati, fullName, tel, comment) => (dispatch) => {
-  let request = JSON.parse(localStorage.getItem(number.toString()))
+  let request = JSON.parse(api.getRequest(number))
   const newRequest = {
     number: number,
     company: company,

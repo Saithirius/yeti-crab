@@ -11,13 +11,15 @@
 
 #Документация REST API
 
-| API Endpoint | Запрос | Тело запроса | Ответ | 
-| ---          | ---    | ---          | ---   |
-| /requests | get | count (integer - default: 10) | json: { "requests": [RequestType*, ...] } |
-| | | | resultCode: (0 - successfully, 1 - error) |
-| /requests/add | post | json - RequestType* | resultCode: (0 - successfully, 1 - error) |
-| /requests/add | put | json - RequestType* | resultCode: (0 - successfully, 1 - error) |
-| /requests/del | delete | number: (integer) | resultCode: (0 - successfully, 1 - error) |
+| API Endpoint | Запрос | Тело запроса | Ответ | Описание |
+| ---          | ---    | ---          | ---   | --- |
+| /requests | get | count (integer - default: 10) | json: { "requests": [RequestType*, ...] } | Получить все заявки |
+| | | | resultCode: (0 - successfully, 1 - error) | |
+| /request/{number} | get | | json - RequestType* | Получить заявку под номером |
+| /request/add | post | json - RequestType* | resultCode: (0 - successfully, 1 - error) | Добавить новую заявку |
+| /request/add | put | json - RequestType* | resultCode: (0 - successfully, 1 - error) | Изменить заявку |
+| /request/del | delete | number: (integer) | resultCode: (0 - successfully, 1 - error) | Удалить заявку |
+| /request/last-number | get |  | lastNumber: (integer) | Получить номер последней заявки |
 RequestType* - {"number": integer, "company": string, "ati": integer, "fullName": string, "tel": string, "comment": string, "date": date}
 ```json
 Example:
