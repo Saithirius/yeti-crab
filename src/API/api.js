@@ -24,7 +24,7 @@ export const api = {
   saveRequest(request) {
     try {
       localStorage.setItem(request.number.toString(), JSON.stringify(request));
-      localStorage.setItem('lastRequestNumber', request.number.toString());
+      if (parseInt(this.getLastNumber()) < request.number ) localStorage.setItem('lastRequestNumber', request.number.toString());
     } catch (e) {
       alert('Ошибка' + e);
     }
