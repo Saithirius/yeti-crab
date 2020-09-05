@@ -3,14 +3,14 @@ import styles from './Table.module.css'
 import {validateNewRequest} from "./Validator";
 
 const Request = (props) => {
-  let data = {
+  const data = {
     company: props.company,
     ati: props.ati,
     fullName: props.fullName,
     tel: props.tel,
     comment: props.comment
   }
-  let [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false)
 
   const updateRequest = () => {
     if (validateNewRequest(data.company, data.ati, data.fullName, data.tel)) {
